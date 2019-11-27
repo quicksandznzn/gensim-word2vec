@@ -6,17 +6,15 @@ import datetime
 def parse_file(file_path):
     start_time = datetime.datetime.now()
     CRFLexicalAnalyzer = JClass(config.hanlp_crf_class)
-    # if you don't crf model remove  config.crf_path
+    # if you don't crf model(see https://github.com/hankcs/HanLP) remove  config.crf_path
     analyzer = CRFLexicalAnalyzer(config.crf_path)
     data_list = []
-
     with open(file_path, 'r', encoding='utf-8') as input_f:
         for line in input_f:
             sb = ""
             for term in analyzer.seg(line):
                 sb += (term.word + ' ')
-            sb = sb.translate(str.maketrans('', '', "[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。？、~@#￥%……&*（）“”‘’》《；＃】【〗＜＝┨〉．：]+"))
-            print(sb)
+            sb = sb.translate(str.maketrans('', '', config.string_reg))
             data_list.append(sb)
     end_time = datetime.datetime.now()
     print("save done", (start_time - end_time).seconds)

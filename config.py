@@ -9,6 +9,7 @@ data_path = output_dir + "/test_split.txt"
 crf_path = output_dir + "/crf/cws.txt"
 model_path = output_dir + "/model/model"
 model_txt_path = output_dir + "/model/model.txt"
+string_reg = "[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。？、~@#￥%……&*（）“”‘’》《；＃】【〗＜＝┨〉．：]+"
 
 
 
