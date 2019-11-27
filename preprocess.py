@@ -1,10 +1,10 @@
 from pyhanlp import *
 import config
-import datetime
+import time
 
 
 def parse_file(file_path):
-    start_time = datetime.datetime.now()
+    start_time = time.time()
     CRFLexicalAnalyzer = JClass(config.hanlp_crf_class)
     # if you don't crf model(see https://github.com/hankcs/HanLP) remove  config.crf_path
     analyzer = CRFLexicalAnalyzer(config.crf_path)
@@ -16,18 +16,18 @@ def parse_file(file_path):
                 sb += (term.word + ' ')
             sb = sb.translate(str.maketrans('', '', config.string_reg))
             data_list.append(sb)
-    end_time = datetime.datetime.now()
-    print("save done", (start_time - end_time).seconds)
+    end_time = time.time()
+    print("save done", (start_time - end_time))
     return data_list;
 
 
 def save_data(data_path, data_list):
-    start_time = datetime.datetime.now()
+    start_time = time.time()
     with open(data_path, 'w', encoding='utf-8') as f:
         for data in data_list:
             f.write(data + " ")
-    end_time = datetime.datetime.now()
-    print("save done", (start_time - end_time).seconds)
+    end_time = time.time()
+    print("save done", (start_time - end_time))
 
 
 if __name__ == '__main__':
