@@ -2,13 +2,24 @@ from gensim.models import Word2Vec
 import config
 import time
 from gensim.models.word2vec import LineSentence, PathLineSentences
+from gensim.models.callbacks import CallbackAny2Vec
+
+
+class callback(CallbackAny2Vec):
+    def __init__(self):
+        self.epoch = 0
+
+    def on_epoch_end(self, model):
+        loss = model.get_latest_training_loss()
+        print('Loss after epoch {}: {}'.format(self.epoch, loss))
+        self.epoch += 1
 
 
 def train(data_path, model_path, model_txt_path):
     start_time = start_time = time.time()
     # sentences = word2vec.PathLineSentences(segment_dir)
     sentences = LineSentence(data_path)
-    train_model = Word2Vec(sentences, size=100, window=5, min_count=1, workers=8)
+    train_model = Word2Vec(sentences, workers=8, iter=20, compute_loss=True, callbacks=[callback()])
     train_model.save(model_path)
     train_model.wv.save_word2vec_format(model_txt_path, binary=False)
     end_time = start_time = time.time()
