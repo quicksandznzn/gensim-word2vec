@@ -11,7 +11,7 @@ class callback(CallbackAny2Vec):
 
     def on_epoch_end(self, model):
         loss = model.get_latest_training_loss()
-        print('Loss after epoch {} {}: {}'.format(time.time(),self.epoch, loss))
+        print('Loss after epoch {} {}: {}'.format(time.strftime('%Y-%m-%d %H:%M:%S %p'),self.epoch, loss))
         self.epoch += 1
 
 
