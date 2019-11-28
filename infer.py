@@ -1,6 +1,5 @@
 from gensim.models import Word2Vec
 from gensim.models.word2vec import Word2VecKeyedVectors
-from gensim.models.callbacks import CallbackAny2Vec
 import config
 
 
