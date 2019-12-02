@@ -10,8 +10,8 @@ def infer(model_path):
     model = Word2Vec.load(model_path)
     # vector
     # print(model['北京'])
-    print(model.most_similar('北京', topn=20))
-    print(model.similarity('重庆市', '青岛市'))
+    print(model.most_similar('重庆市', topn=20))
+    print(model.similarity('重庆', '青岛'))
 
 
 if __name__ == '__main__':

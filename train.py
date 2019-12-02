@@ -24,7 +24,7 @@ def train(data_path, model_path, model_txt_path):
     train_model.save(model_path)
     train_model.wv.save_word2vec_format(model_txt_path, binary=False)
     end_time = time.time()
-    print("train done", (start_time - end_time))
+    print("train done", (end_time - start_time))
 
 
 if __name__ == '__main__':
