@@ -4,6 +4,7 @@ import time
 from gensim.models.word2vec import LineSentence, PathLineSentences
 from gensim.models.callbacks import CallbackAny2Vec
 from multiprocessing import cpu_count
+import argparse
 
 
 class callback(CallbackAny2Vec):
@@ -16,18 +17,35 @@ class callback(CallbackAny2Vec):
         self.epoch += 1
 
 
-def train(data_path, model_path, model_txt_path):
+def train(sg):
     start_time = time.time()
     # sentences = word2vec.PathLineSentences(segment_dir)
-    # train_model = Word2Vec(LineSentence(data_path), sg=1, window=10, workers=cpu_count(), iter=20, compute_loss=True,
-    #                       callbacks=[callback()])
-    train_model = Word2Vec(LineSentence(data_path), workers=cpu_count(), iter=20, compute_loss=True, callbacks=[callback()])
+
+    if sg == 0:
+        train_model = Word2Vec(LineSentence(config.data_path), sg=0, workers=cpu_count(), iter=20, compute_loss=True,
+                               callbacks=[callback()])
+    else:
+        #
+        train_model = Word2Vec(LineSentence(config.data_path), sg=1, hs=1, window=10, workers=cpu_count(), iter=3,
+                               compute_loss=True, callbacks=[callback()])
+
+    if sg == 0:
+        model_path = config.cbow_model_path
+        model_txt_path = config.cbow_model_path
+    else:
+        model_path = config.skip_model_path
+        model_txt_path = config.skip_model_path
+
     train_model.callbacks = {}
     train_model.save(model_path)
-    train_model.wv.save_word2vec_format(model_txt_path, binary=False)
+    # train_model.wv.save_word2vec_format(model_txt_path, binary=False)
     end_time = time.time()
     print("train done", (end_time - start_time))
 
 
 if __name__ == '__main__':
-    train(config.data_path, config.model_path, config.model_txt_path)
+    parser = argparse.ArgumentParser(description='manual to this script')
+    # 0 skip 1 cbow
+    parser.add_argument('--sg', type=str, default=0)
+    args = parser.parse_args()
+    train(args.sg)
