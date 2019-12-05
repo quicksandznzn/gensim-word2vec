@@ -22,19 +22,19 @@ def train(sg):
     # sentences = word2vec.PathLineSentences(segment_dir)
 
     if sg == 0:
-        train_model = Word2Vec(LineSentence(config.data_path), sg=0, workers=cpu_count(), iter=20, compute_loss=True,
+        train_model = Word2Vec(LineSentence(config.data_path), sg=0, workers=cpu_count(), iter=10, compute_loss=True,
                                callbacks=[callback()])
     else:
         #
-        train_model = Word2Vec(LineSentence(config.data_path), sg=1, hs=1, window=10, workers=cpu_count(), iter=3,
+        train_model = Word2Vec(LineSentence(config.data_path), sg=1, hs=1, workers=cpu_count(), iter=5,
                                compute_loss=True, callbacks=[callback()])
 
     if sg == 0:
         model_path = config.cbow_model_path
-        model_txt_path = config.cbow_model_path
+        # model_txt_path = config.cbow_model_path
     else:
         model_path = config.skip_model_path
-        model_txt_path = config.skip_model_path
+        # model_txt_path = config.skip_model_path
 
     train_model.callbacks = {}
     train_model.save(model_path)
