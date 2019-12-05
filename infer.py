@@ -43,21 +43,11 @@ def predict_proba(oword, iword):
     lprob = -sum(np.logaddexp(0, -dot) + oword.code * dot)
     return lprob
 
-    # iword_vec = model[iword]
-    # oword = model.wv.vocab[oword]
-    # oword_l = model.trainables.syn1[oword.point].T
-    # dot = np.dot(iword_vec, oword_l)
-    # lprob = -sum(np.logaddexp(0, -dot) + oword.code*dot)
-    # return lprob
-
 
 def infer():
-    # this load func is too slow
-    # model = Word2VecKeyedVectors.load_word2vec_format("/data1/services/word2vec/output/test/all.txt")
-
     # vector
     print(model.most_similar('北京', topn=20))
-    # print(model.similarity('重庆', '青岛'))
+    print(model.similarity('重庆', '青岛'))
 
 
 if __name__ == '__main__':
