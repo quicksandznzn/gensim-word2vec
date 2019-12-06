@@ -17,14 +17,14 @@ def keywords(s):
     return Counter(ws).most_common()
 
 
-def relative_words(word, topN):
+def relative_words(word, topn):
     """
     相关-互信息
     :param word:
     :return:
     """
     r = {i: predict_proba(i, word) - 0.9 * np.log(j.count) for i, j in model.wv.vocab.items()}
-    return Counter(r).most_common(topN)
+    return Counter(r).most_common(topn)
 
 
 def predict_proba(oword, iword):
@@ -44,10 +44,10 @@ def predict_proba(oword, iword):
     return lprob
 
 
-def infer():
+def infer(s, topn):
     # vector
-    print(model.most_similar('北京', topn=20))
-    print(model.similarity('重庆', '青岛'))
+    return model.most_similar(s, topn=topn)
+    # print(model.similarity('重庆', '青岛'))
 
 
 if __name__ == '__main__':
@@ -66,6 +66,6 @@ if __name__ == '__main__':
         else:
             model = Word2VecKeyedVectors.load_word2vec_format(config.skip_model_path)
 
+    print(infer('苹果', 10))
 
-    s=['北京','你好','我爱你','祖国']
-    print(keywords(s))
+    # print(relative_words('北京大学', 10))
