@@ -1,6 +1,5 @@
 # word2vec
 
-**this project use hanlp crf segment corpus use gensim word2vec train**
 
 1. use python3<br>
    pip3 install pyhanlp<br>
