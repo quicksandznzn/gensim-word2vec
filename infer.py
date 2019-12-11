@@ -66,6 +66,6 @@ if __name__ == '__main__':
         else:
             model = Word2VecKeyedVectors.load_word2vec_format(config.skip_model_path)
 
-    print(infer('苹果', 10))
+    # print(infer('苹果', 10))
 
-    # print(relative_words('北京大学', 10))
+    print(relative_words('北京大学', 30))
