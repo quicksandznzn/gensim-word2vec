@@ -21,6 +21,7 @@ def relative_words(word, topn):
     """
     相关-互信息
     :param word:
+    :param topn:
     :return:
     """
     r = {i: predict_proba(i, word) - 0.9 * np.log(j.count) for i, j in model.wv.vocab.items()}
