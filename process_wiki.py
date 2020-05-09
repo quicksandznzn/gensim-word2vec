@@ -13,7 +13,7 @@ def process(inp, outp):
     output = open(outp, 'w')
     wiki = WikiCorpus(inp, lemmatize=False, dictionary={})
     for text in wiki.get_texts():
-        output.write(' '.join(text) + "\n")
+        output.write(' '.join(decode_text(text)) + "\n")
         i += 1
         if i % 10000 == 0:
             print("saved " + str(i) + " articles")
@@ -22,7 +22,7 @@ def process(inp, outp):
 def decode_text(text):
     words = []
     for w in text:
-        words.append(w.decode('utf-8'))
+        words.append(w.encode('utf-8').decode('utf-8'))
     return words
 
 if __name__ == '__main__':

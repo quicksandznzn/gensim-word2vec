@@ -9,9 +9,9 @@
 
 3. python3 process_wiki.py
 
-4. opencc -c t2s.json -i /output/corpus/wiki/wiki.zn.txt -o /output/corpus/wiki/wiki.zn.t2s.txt
+4. opencc -c t2s.json -i ./output/corpus/wiki/wiki.zn.txt -o ./output/corpus/wiki/wiki.zn.t2s.txt
 
-5. iconv -c -t UTF-8 < /output/corpus/wiki/wiki.zn.t2s.txt > /output/corpus/wiki/wiki.zn.t2s.utf8.txt
+5. iconv -c -t UTF-8 < ./output/corpus/wiki/wiki.zn.t2s.txt > ./output/corpus/wiki/wiki.zn.t2s.utf8.txt
 
 6. hanlp segment  --config /usr/local/lib/python3.6/site-packages/pyhanlp/static/hanlp.properties   < wiki.zn.t2s.utf8.txt > wiki.zn.t2s.utf8.split.txt
 
